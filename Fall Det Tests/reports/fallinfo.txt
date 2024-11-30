@@ -1,0 +1,51 @@
+====>>>>Function fall_det (center of mass wala)
+
+First it finds all the landmark coordinates of various body landmarks in an (X, Y) plane by a pose estimation model. These landmarks include the left and right hip(23, 24), knee(25, 26), ankle(27, 28), heel(29, 30), and foot index(31, 32).
+
+It then calculates the midpoint between the different parts of the body like upper, lower and overall body.
+
+It then calculates the mod point between the left and right foot indexes which serve as the point of action for determining falls.
+
+Later the difference between the horizontal position of the point of action and overall body mid point is calculated and if it exceeds the threshold (50 in this case). Then the system considers it as a potenitial fall.
+
+And if this condition is completed then it checks the fall on the basis of angles of different joints of the body.
+
+
+====>>>>Function is_fallen (angles wala)
+
+Takes the coordinates of different joints of body: left shoulder, left hip, left knee, left ankle, right shoulder, right hip, right knee, right ankle.
+
+Calculates the angles formed by these joints:
+->Angle between the left shoulder, left hip and left knee.
+->Angle between the left hip, left knee and left ankle.
+->Angle between the  right shoulder,  right hip and  right knee.
+->Angle between the  right hip,  right knee and  right ankle.
+
+The threshold for shoulder-hip-knee and hip-knee-ankle angles is set to 120 degrees and if this condition is checked for both the sides of the subjects body and if either side of the body exceeds the threshold then it is considered as a potential fall and if neither of the conditon is satisfied no fall is considered.
+
+And if a potential fall is passed by this condition as well then it checks for a fall on the basis of frame and position of the human body with respect to ground.
+
+============================================
+
+By using human body detection the system creates a frame around the subject's human body. If the lenght of the human body is less than that of the breadth of the body then finally a potential fall is declared as a fall.
+
+=========================================================================================
+
+After a fall is completely detected it sends a message using a telegram bot to concerned parties (family/anyone with telegram bot caht link) of the subject to alert them about any potential fall of the subject. 
+
+=========================================================================================
+
+To make it audio enabled we have also added speech recognition to the system to send the same message to the family if the person falls out of camera frame and no fall is being detected so to alert the parties a message can be sent using some keyword ("help" in this case) to the family.
+
+=========================================================================================
+
+
+
+
+
+
+
+
+
+
+
